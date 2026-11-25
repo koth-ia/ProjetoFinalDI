@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ArenaManager: crie, organize e acompanhe campeonatos esportivos com montagem automática de tabelas, horários e quadras.">
+  <meta name="theme-color" content="#0E1A2B">
+  <title>ArenaManager</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%230E1A2B'/%3E%3Cpath d='M9 30 L20 9 L31 30' fill='none' stroke='%23C5EE3A' stroke-width='4' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M14 23 H26' stroke='%23F4F3EE' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <!-- Fontes Barlow (Google Fonts). Sem internet, o site usa as fontes do sistema. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Aplica o tema salvo antes de desenhar a página, para não "piscar" entre claro e escuro.
+    try {
+      var p = JSON.parse(localStorage.getItem('arenamanager:v1:preferences') || '{}');
+      var dark = p.theme === 'dark' || ((!p.theme || p.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      if (p.highContrast) document.documentElement.dataset.contrast = 'high';
+      if (p.fontScale) document.documentElement.style.setProperty('--font-scale', p.fontScale);
+    } catch (e) { /* armazenamento indisponível: usa o tema padrão */ }
+  </script>
+</head>
+<body>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+  <!-- Todo o conteúdo é desenhado pelo app.js dentro deste elemento -->
+  <div id="app">
+    <noscript>
+      <div class="no-js">
+        <h1>O ArenaManager precisa de JavaScript</h1>
+        <p>Ative o JavaScript no navegador para usar o site.</p>
+      </div>
+    </noscript>
+  </div>
+
+  <!-- Notificações (lidas por leitores de tela) -->
+  <div class="toast-region" role="region" aria-label="Notificações">
+    <div id="toasts" aria-live="polite"></div>
+  </div>
+
+  <!-- Janelas de diálogo reutilizadas pelo app.js -->
+  <dialog class="modal" id="main-dialog"></dialog>
+  <dialog class="modal" id="confirm-dialog"></dialog>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
