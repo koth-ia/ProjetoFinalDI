@@ -1154,3 +1154,34 @@ main:focus { outline: none; }
 .help-layout > *, .contact-layout > *, .two-col > *, .hero-grid > *, .builder-demo > *, .a11y-grid > * { min-width: 0; }
 .system-suggestion > div, .rules-entity > span { min-width: 0; }
 .badge-suggestion, .rules-entity .badge { white-space: normal; }
+
+/* =================== Movimento ao passar o mouse nas modalidades =================== */
+/* Cartões do carrossel da página inicial: sobem, ganham sombra e borda azul,
+   a ilustração da quadra aproxima e a seta do link avança.
+   Também vale para o foco do teclado (:focus-within). Com "Reduzir animações"
+   ligado, as transições são desativadas pela regra global de movimento. */
+.carousel-track { padding-top: 12px; margin-top: -12px; padding-inline: 4px; padding-bottom: 32px; margin-bottom: -20px; }
+.sport-slide-meta { display: block; }
+.sport-slide-meta .ic { display: inline-block; vertical-align: -3px; margin-right: 4px; }
+.sport-slide-meta .badge { margin-top: 4px; }
+.sport-slide { transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease); }
+.sport-slide-art { transition: transform 600ms var(--ease); transform-origin: center; }
+.sport-slide-body h3 { transition: color var(--dur) var(--ease); }
+.sport-slide-body a { display: inline-flex; align-items: center; gap: 6px; }
+.sport-slide-body a::after { content: '\2192'; content: '\2192' / ''; transition: transform var(--dur) var(--ease); }
+.sport-slide:focus-within { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--c-primary); }
+.sport-slide:focus-within .sport-slide-art { transform: scale(1.08) rotate(-1deg); }
+@media (hover: hover) {
+  .sport-slide:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--c-primary); }
+  .sport-slide:hover .sport-slide-art { transform: scale(1.08) rotate(-1deg); }
+  .sport-slide:hover h3 { color: var(--c-primary); }
+  .sport-slide:hover .sport-slide-body a::after { transform: translateX(4px); }
+}
+
+/* Lista de modalidades da página Regras: o item desliza e a miniatura aproxima */
+.rules-nav-item { transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease); }
+.rules-nav-thumb svg { transition: transform 500ms var(--ease); }
+@media (hover: hover) {
+  .rules-nav-item:hover { transform: translateX(4px); box-shadow: var(--shadow-md); }
+  .rules-nav-item:hover .rules-nav-thumb svg { transform: scale(1.12); }
+}
